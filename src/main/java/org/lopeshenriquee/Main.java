@@ -9,13 +9,14 @@ import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) {
         Main.init();
 
     }
 
     public static void init() {
-        Scanner scan = new Scanner(System.in);
+
 
         System.out.println("************************************************************");
         System.out.println("Seja Bem vindo(a) ao Conversor de Moeda");
@@ -27,7 +28,7 @@ public class Main {
         System.out.println("5) Real ==> Euro");
         System.out.println("6) Real ==> Yen> ");
         System.out.println("0) Sair");
-        int i = scan.nextInt();
+        int i = Main.scan.nextInt();
 
         switch (i) {
             case 1:
@@ -65,5 +66,14 @@ public class Main {
                 break;
         }
     }
+    public void USDForBRL(){
+        CoinConsult coinConsult = new CoinConsult();
+        Coin coin = coinConsult.getCoin("USD", "BRL");
+        System.out.print("Digite o valor em Dólar que deseja converter: ");
+        double valueUSD = scan.nextDouble();
 
+        double valueConvert = valueUSD * coin.value();
+        System.out.println(valueUSD + " USD = " + valueConvert + " BRL");
+
+    }
 }
