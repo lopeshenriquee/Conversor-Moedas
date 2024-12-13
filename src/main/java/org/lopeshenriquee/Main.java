@@ -1,6 +1,5 @@
 package org.lopeshenriquee;
 
-import jdk.jshell.execution.Util;
 import org.lopeshenriquee.controller.Coin;
 import org.lopeshenriquee.controller.CoinConsult;
 
@@ -33,7 +32,7 @@ public class Main {
         switch (i) {
             case 1:
                 System.out.println("1) Dólar ==> Real");
-                System.out.println();
+                USDForBRL();
                 break;
             case 2:
                 System.out.println("2) Dólar ==> Euro");
@@ -66,9 +65,10 @@ public class Main {
                 break;
         }
     }
-    public void USDForBRL(){
+    public static void USDForBRL(){
         CoinConsult coinConsult = new CoinConsult();
         Coin coin = coinConsult.getCoin("USD", "BRL");
+        System.out.println("Taxa de conversão: 1 USD = " + coin.value() + " BRL");
         System.out.print("Digite o valor em Dólar que deseja converter: ");
         double valueUSD = scan.nextDouble();
 
