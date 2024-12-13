@@ -13,7 +13,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class CoinConsult {
-    public Coin getCoinBrl(String currency) {
+    public Coin getCoin(String baseCurrency, String targetCurrency) {
         String urlStr = ("https://v6.exchangerate-api.com/v6/39e7c4f49219e92df88e94fa/latest/BRL");
         try {
             URL url = new URL(urlStr);
@@ -32,14 +32,12 @@ public class CoinConsult {
             conn.disconnect();
 
             JSONObject json = new JSONObject(content.toString());
-
-            String coin = "BRL";
-            double value = json.getJSONObject("conversion_rates").getDouble("BRL");
+            double value = json.getJSONObject("conversion_rates").getDouble(targetCurrency);
             String lastUpdateUtc = json.getString("time_last_update_utc");
 
-            return new Coin(coin, value, lastUpdateUtc);
+            return new Coin(targetCurrency, value, lastUpdateUtc);
         } catch (Exception e) {
-            throw new RuntimeException("Não consegui obter a url");
+            throw new RuntimeException("Não consegui obter a url: " + e.getMessage());
         }
     }
 }
