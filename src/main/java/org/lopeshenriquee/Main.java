@@ -1,6 +1,8 @@
 package org.lopeshenriquee;
 
 import jdk.jshell.execution.Util;
+import org.lopeshenriquee.controller.Coin;
+import org.lopeshenriquee.controller.CoinConsult;
 
 import java.util.Scanner;
 
@@ -29,22 +31,29 @@ public class Main {
 
         switch (i) {
             case 1:
-                System.out.println("");
+                System.out.println("1) Dólar ==> Real");
+                System.out.println();
                 break;
             case 2:
-                System.out.println("");
+                System.out.println("2) Dólar ==> Euro");
+                System.out.println();
+
                 break;
             case 3:
-                System.out.println("");
+                System.out.println("3) Dólar ==> Yen");
+                System.out.println();
                 break;
             case 4:
-                System.out.println("");
+                System.out.println("4) Real ==> Dólar");
+                System.out.println();
                 break;
             case 5:
-                System.out.println("");
+                System.out.println("5) Real ==> Euro");
+                System.out.println();
                 break;
             case 6:
-                System.out.println("");
+                System.out.println("6) Real ==> Yen> ");
+                System.out.println();
                 break;
             case 0:
                 System.out.println("Encerrando sistema...");
@@ -56,4 +65,5 @@ public class Main {
                 break;
         }
     }
+
 }
