@@ -27,6 +27,11 @@ public class CoinConsult {
             conn.disconnect();
 
             JSONObject json = new JSONObject(content.toString());
+
+            if (!json.getString("result").equalsIgnoreCase("success")){
+                throw new RuntimeException("Moeda inválida ou erro na API" + json.getString("error-type"));
+            }
+
             double value = json.getJSONObject("conversion_rates").getDouble(targetCurrency);
             String lastUpdateUtc = json.getString("time_last_update_utc");
 
