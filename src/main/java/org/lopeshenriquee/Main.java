@@ -11,69 +11,33 @@ public class Main {
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args) {
         Main.init();
-
     }
 
     public static void init() {
+        System.out.println("\nSeja Bem vindo(a) ao Conversor de Moeda");
+        System.out.println("Digite a moeda para ser convertida (ex: ):");
+        String baseCurrency = scan.nextLine().toUpperCase();
 
+        System.out.println("Digite a moeda alvo (ex: BRL, USD):");
+        String targetCurrency = scan.nextLine().toUpperCase();
 
-        System.out.println("************************************************************");
-        System.out.println("Seja Bem vindo(a) ao Conversor de Moeda");
-        System.out.println("Escolha uma Opção: ");
-        System.out.println("1) Dólar ==> Real");
-        System.out.println("2) Dólar ==> Euro");
-        System.out.println("3) Dólar ==> Yen");
-        System.out.println("4) Real ==> Dólar");
-        System.out.println("5) Real ==> Euro");
-        System.out.println("6) Real ==> Yen> ");
-        System.out.println("0) Sair");
-        int i = Main.scan.nextInt();
-
-        switch (i) {
-            case 1:
-                System.out.println("1) Dólar ==> Real");
-                USDForBRL();
-                break;
-            case 2:
-                System.out.println("2) Dólar ==> Euro");
-                System.out.println();
-
-                break;
-            case 3:
-                System.out.println("3) Dólar ==> Yen");
-                System.out.println();
-                break;
-            case 4:
-                System.out.println("4) Real ==> Dólar");
-                System.out.println();
-                break;
-            case 5:
-                System.out.println("5) Real ==> Euro");
-                System.out.println();
-                break;
-            case 6:
-                System.out.println("6) Real ==> Yen> ");
-                System.out.println();
-                break;
-            case 0:
-                System.out.println("Encerrando sistema...");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Digite um número válido");
-                Main.init();
-                break;
-        }
-    }
-    public static void USDForBRL(){
         CoinConsult coinConsult = new CoinConsult();
-        Coin coin = coinConsult.getCoin("USD", "BRL");
-        System.out.println("Taxa de conversão: 1 USD = " + coin.value() + " BRL");
-        System.out.print("Digite o valor em Dólar que deseja converter: ");
-        double valueUSD = scan.nextDouble();
+        Coin coin = coinConsult.getCoin(baseCurrency, targetCurrency);
 
-        double valueConvert = valueUSD * coin.value();
-        System.out.println(valueUSD + " USD = " + valueConvert + " BRL");
+        System.out.println("Conversão atual: 1 "+ baseCurrency +" = " + coin.value() + " "+ targetCurrency);
+        System.out.print("Digite o valor que deseja converter: ");
+        double valueCoin = scan.nextDouble();
 
+        double valueConvert = valueCoin * coin.value();
+        System.out.println(valueCoin + " " + baseCurrency + " = " + valueConvert + " " + targetCurrency);
+
+        System.out.println("\nDeseja realizar outra conversão? (s/n)");
+        String response = scan.next();
+        if (response.equalsIgnoreCase("s")) {
+            init();
+        } else {
+            System.out.println("Encerrando o programa...");
+            System.exit(0);
+        }
     }
 }
