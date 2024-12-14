@@ -38,12 +38,12 @@ public class CoinConsult {
                 throw new RuntimeException("Moeda de destino invàlida: " + targetCurrency);
             }
 
-            double value = json.getJSONObject("conversion_rates").getDouble(targetCurrency);
+            double value = rates.getDouble(targetCurrency);
             String lastUpdateUtc = json.getString("time_last_update_utc");
 
             return new Coin(targetCurrency, value, lastUpdateUtc);
         } catch (Exception e) {
-            throw new RuntimeException("Não consegui obter a url: " + e.getMessage());
+            throw new RuntimeException("Erro ao obter dados da API: " + e.getMessage());
         }
     }
 }
