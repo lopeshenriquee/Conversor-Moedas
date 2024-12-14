@@ -15,14 +15,26 @@ public class Main {
 
     public static void init() {
         System.out.println("\nSeja Bem vindo(a) ao Conversor de Moeda");
-        System.out.println("Digite a moeda para ser convertida (ex: ):");
-        String baseCurrency = scan.nextLine().toUpperCase();
+        String baseCurrency = validateCoin("Digite a moeda para ser convertida: ");
+        String targetCurrency = validateCoin("Digite a moeda alvo: ");
 
-        System.out.println("Digite a moeda alvo (ex: BRL, USD):");
-        String targetCurrency = scan.nextLine().toUpperCase();
+        convertCurrency(baseCurrency, targetCurrency);
 
+    }
+    public static void convertCurrency(String baseCurrency, String targetCurrency){
         CoinConsult coinConsult = new CoinConsult();
-        Coin coin = coinConsult.getCoin(baseCurrency, targetCurrency);
+        Coin coin;
+
+        while(true){
+            try {
+                coin = coinConsult.getCoin(baseCurrency, targetCurrency);
+                break;
+            } catch (RuntimeException e) {
+                System.out.println("Erro: " + e.getMessage());
+                baseCurrency = validateCoin("Digite a moeda para ser convertida: ");
+                targetCurrency = validateCoin("Digite a moeda alvo: ");
+            }
+        }
 
         System.out.println("Conversão atual: 1 "+ baseCurrency +" = " + coin.value() + " "+ targetCurrency);
         System.out.print("Digite o valor que deseja converter: ");
@@ -39,5 +51,20 @@ public class Main {
             System.out.println("Encerrando o programa...");
             System.exit(0);
         }
+    }
+
+    public static String validateCoin(String message){
+        String currency;
+        while(true) {
+            System.out.println(message);
+            currency = scan.next().toUpperCase();
+
+            if (currency.matches("^[A-Z]{3}$")) {
+                break;
+            } else {
+                System.out.println("Moeda inválida! Tente novamente (ex: USD, BRL)");
+            }
+        }
+        return currency;
     }
 }
