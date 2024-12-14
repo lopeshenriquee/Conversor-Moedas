@@ -14,7 +14,7 @@ import java.net.http.HttpResponse;
 
 public class CoinConsult {
     public Coin getCoin(String baseCurrency, String targetCurrency) {
-        String urlStr = ("https://v6.exchangerate-api.com/v6/39e7c4f49219e92df88e94fa/latest/USD");
+        String urlStr = ("https://v6.exchangerate-api.com/v6/39e7c4f49219e92df88e94fa/latest/" + baseCurrency);
         try {
             URL url = new URL(urlStr);
 
